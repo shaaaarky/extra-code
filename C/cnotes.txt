@@ -1,0 +1,28 @@
+Welcome to C notes
+
+1. Variable types
+When specifing a variable use do so with this syntax:
+       (Variable type   (Variable name)    (Variable Value)
+	char[]           username =         sharky
+
+(char) single character s
+
+(char[]) Array or string ? sharky
+
+(int) Interger/number 12
+
+(float) fraction 0.9
+
+(double) Long float
+
+2. Displaying variables
+(%d) int
+(%s) array
+(%f) float
+(%c) character
+(%lf) double
+(
+
+3. Booleans
+1 = True
+0 = False
