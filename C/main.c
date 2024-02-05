@@ -1,22 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+
+double square(double num){
+    double result = num * num;
+    return result;
+}
 
 int main(){
-    int nota;
-    printf("Please tick off one of the boxes: ");
-    scanf("%i", &nota);
-    
-    switch(nota){
-        case 1:
-            printf("You got the correct answer! Congrats");
-            break;
-        case 2:
-            printf("You got it wrong.\nStudy harder next time.");
-            break;  
-        default:
-            printf("Please input a valid answer.");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-    };
+    double x = 3; 
+    double y = square(x);
+    printf("%.1lf", y);
     return 0;
 }
  
