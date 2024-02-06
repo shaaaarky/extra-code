@@ -1,28 +1,37 @@
 import getpass
 import smtplib
 
-HOST = "smtp-mail.outlook.com"
-PORT = 587
+def sendmail(sender, to, user, subject, body):
+    # Detes to fill out  
+    
+    smtpserver = smtplib.SMTP("smtp-mail.outlook.com", 587)
+    
+    # Prints detes of connection and prompts the user for a password
+    print(f"From: {sender} To: {to}")
+    password = getpass.getpass("Password: ")
 
-FROM_EMAIL = "bradshawcantos@outlook.com"
-TO_EMAIL = "benwellington685@gmail.com"
-PASSWORD = getpass.getpass("Enter password: ")
+    # SMTP extented hello
+    status_code, response = smtpserver.ehlo()
+    print(f"[*] Echoing the server: {status_code} {response}")
 
-MESSAGE = """Subject: Python
-Hello! This is an automated message sent by a python script
+    # Start of TLS instance
+    status_code, response = smtpserver.starttls()
+    print(f"[*] Starting TLS Connection: {status_code} {response}") 
 
-"""
+    # Login to server 
+    smtpserver.login(user, password)
+    print(f"[*] Logging in: {status_code} {response}")
 
-smtp = smtplib.SMTP(HOST, PORT)
-status_code, response = smtp.ehlo()
-print(f"[*] Echoing the server: {status_code} {response}")
+    header = 'To:' + to + '\n' + 'From: ' + sender + '\n' + 'Subject:' + subject + '\n'
+    message = header + '\n' + body
+    
+    # Sending email
+    smtpserver.sendmail(sender, to, message)
+    smtpserver.close()
 
-status_code, response = smtp.starttls()
-print(f"[*] Starting TLS Connection: {status_code} {response}") 
-
-status_code, response = smtp.login(FROM_EMAIL, TO_EMAIL)
-print(f"[*] Logging in: {status_code} {response}")
-
-smtp.sendmail(FROM_EMAIL, TO_EMAIL, MESSAGE)
-smtp.quit()
-
+t = "Repeated function in python"
+subject = 'Emails with python'
+to = 'bradshawcantos@gmail.com'
+sender = 'bradshawcantos@outlook.com'
+user = 'bradshawcantos@outlook.com'
+sendmail(sender=sender, to=to, user=user, subject=subject, body=t)
