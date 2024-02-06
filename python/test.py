@@ -1,8 +1,19 @@
-import random
+import smtplib
 
-def gen_rnd_value(x):
-    genned = random.randint(1, x)
-    return genned
+def sendmail():
+    subject = 'Python automation'
+    to = 'bradshawcantos@gmail.com'
+    sender = 'bradshawcantos@outlook.com'
+    smtpserver = smtplib.SMTP("smtp-mail.outlook.com",587)
+    user = 'bradshawcantos@outlook.com'
+    password = ''
+    smtpserver.ehlo()
+    smtpserver.starttls()
+    smtpserver.ehlo
+    smtpserver.login(user, password)
+    header = 'To:' + to + '\n' + 'From: ' + sender + '\n' + 'Subject:' + subject + '\n'
+    message = header + '\n This email has been sent with python'
+    smtpserver.sendmail(sender, to, message)
+    smtpserver.close()
 
-gen_rnd_value(x=2)
-print(genned)
+sendmail()
