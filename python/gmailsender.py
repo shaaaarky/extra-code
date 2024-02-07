@@ -1,10 +1,22 @@
 import getpass
 import smtplib
+from email.mime.text import MIMEText
+
+
 
 def sendmail(sender, to, user, subject, body):
-    # Detes to fill out  
     
-    smtpserver = smtplib.SMTP("smtp-mail.outlook.com", 587)
+    # Message
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg[]
+    
+    
+    
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+       smtp_server.login(sender, password)
+       print(f"[*] Logging in: {status_code} {response}")
+       smtp_server.sendmail(sender, recipients, msg.as_string())
     
     # Prints detes of connection and prompts the user for a password
     print(f"From: {sender} To: {to}")
@@ -20,18 +32,18 @@ def sendmail(sender, to, user, subject, body):
 
     # Login to server 
     smtpserver.login(user, password)
-    print(f"[*] Logging in: {status_code} {response}")
+    
 
-    header = 'To:' + to + '\n' + 'From: ' + sender + '\n' + 'Subject:' + subject + '\n'
-    message = header + '\n' + body
+    
     
     # Sending email
-    smtpserver.sendmail(sender, to, message)
-    smtpserver.close()
+    # smtpserver.sendmail(sender, to, message)
+    # smtpserver.close()
 
-t = "Repeated function in python"
+
+body = "Repeated function in python"
 subject = 'Emails with python'
 to = 'bradshawcantos@gmail.com'
 sender = 'bradshawcantos@outlook.com'
 user = 'bradshawcantos@outlook.com'
-sendmail(sender=sender, to=to, user=user, subject=subject, body=t)
+sendmail(sender=sender, to=to, user=user, subject=subject, body=body)
