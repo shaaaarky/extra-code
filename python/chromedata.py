@@ -20,6 +20,3 @@ shutil.make_archive(f"{zipped_name}", "zip", "examplefolder")
 
 # data_folder = zipfile.ZipFile(f"{zipped_name}", "w")
 # Handling zip file
-myzip = zipfile.ZipFile(f"{attachment}", "r")
-msg = MIMEBase("application", "zip")
-msg.set_payload(zipfile.read())

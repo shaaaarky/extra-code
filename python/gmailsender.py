@@ -1,40 +1,34 @@
 import getpass
 import smtplib
+import zipfile
+import tempfile
+from email import encoders
+from email.message import Message
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
 
-
-
-def sendmail(sender, to, user, subject, body):
+def sendmail(sender, to, subject, body):
     
+    # Filling out password with getpass module
+    print(f"From: {sender} To: {to}")
+    password = "xinj etds egpz whlj"
+
     # Message
     msg = MIMEText(body)
     msg["Subject"] = subject
-    msg[]
-    
-    
-    
+    msg["Body"] = body
+    msg.set_payload()    
+    # Logging in and sending email
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
-       smtp_server.login(sender, password)
-       print(f"[*] Logging in: {status_code} {response}")
-       smtp_server.sendmail(sender, recipients, msg.as_string())
-    
-    # Prints detes of connection and prompts the user for a password
-    print(f"From: {sender} To: {to}")
-    password = getpass.getpass("Password: ")
 
-    # SMTP extented hello
-    status_code, response = smtpserver.ehlo()
-    print(f"[*] Echoing the server: {status_code} {response}")
+        # Logging in to smtp instance
+        status_code, response = smtp_server.login(sender, password)
+        print(f"[*] Logging in: {status_code} {response}")
 
-    # Start of TLS instance
-    status_code, response = smtpserver.starttls()
-    print(f"[*] Starting TLS Connection: {status_code} {response}") 
+        # Sending email
+        smtp_server.sendmail(sender, to, msg.as_string())
 
-    # Login to server 
-    smtpserver.login(user, password)
-    
-
-    
+    print("Email sent")
     
     # Sending email
     # smtpserver.sendmail(sender, to, message)
@@ -43,7 +37,8 @@ def sendmail(sender, to, user, subject, body):
 
 body = "Repeated function in python"
 subject = 'Emails with python'
-to = 'bradshawcantos@gmail.com'
-sender = 'bradshawcantos@outlook.com'
-user = 'bradshawcantos@outlook.com'
-sendmail(sender=sender, to=to, user=user, subject=subject, body=body)
+to = 'benwellington685@gmail.com'
+sender = 'bradshawcantos@gmail.com'
+user = 'benwellington685@gmail.com'
+
+sendmail(sender=sender, to=to, subject=subject, body=body, file=)
