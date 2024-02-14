@@ -3,11 +3,8 @@ import getpass
 import smtplib
 import zipfile
 import tempfile
-from email import encoders
-from email.message import Message
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
 
 def sendmail(sender, to, subject, body, file):
     
@@ -27,10 +24,12 @@ def sendmail(sender, to, subject, body, file):
     msg["From"] = sender
     
     
-    attachment = MIMEText("Zip files in python")
-    attachment.add_header('Content-Disposition', 'attachment', filename=file)
-    msg.attach(attachment)
+    #attachment = MIMEText("Zip files in python")
+    #attachment.add_header('Content-Disposition', 'attachment', filename=file)
+    
+    msg.attach(MIMEText(open(file).read()))
 
+    print("File successfully attached")
 
 
     # Logging in and sending email
@@ -43,7 +42,7 @@ def sendmail(sender, to, subject, body, file):
         # Sending email
         smtp_server.sendmail(sender, to, msg.as_string())
 
-    print("Email sent")
+    print("Email sent successfully")
     
     # Sending email
     # smtpserver.sendmail(sender, to, message)
@@ -58,5 +57,6 @@ subject = 'Emails with python'
 to = 'benwellington685@gmail.com'
 sender = 'bradshawcantos@gmail.com'
 user = 'benwellington685@gmail.com'
+file = r"C:\Users\JohnBradshawCantos\Desktop\data.txt"
 
-sendmail(sender=sender, to=to, subject=subject, body=body, file=f"C:\\Users\\JohnBradshawCantos\\Desktop\\ziptesting.zip")
+sendmail(sender=sender, to=to, subject=subject, body=body, file=file)
