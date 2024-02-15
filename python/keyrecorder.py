@@ -17,4 +17,5 @@ def logger(key):
         listener.stop()
 
 with keyboard.Listener(on_press=logger) as listener:
+    print("Ready")
     listener.join()
