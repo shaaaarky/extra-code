@@ -1,12 +1,9 @@
 import os
-import getpass
 import smtplib
-import zipfile
-import tempfile
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def sendmail(sender, to, subject, body, file):
+def sendmail(sender, to, subject, file):
     
     # Filling out password with getpass module
     print(f"From: {sender} To: {to}")
@@ -24,8 +21,8 @@ def sendmail(sender, to, subject, body, file):
     msg["From"] = sender
     
     
-    #attachment = MIMEText("Zip files in python")
-    #attachment.add_header('Content-Disposition', 'attachment', filename=file)
+    attachment = MIMEText("Zip files in python")
+    attachment.add_header('Content-Disposition', 'attachment', filename=file)
     
     msg.attach(MIMEText(open(file).read()))
 
@@ -41,13 +38,10 @@ def sendmail(sender, to, subject, body, file):
 
         # Sending email
         smtp_server.sendmail(sender, to, msg.as_string())
-
+        smtp_server.close()
     print("Email sent successfully")
     
     # Sending email
-    # smtpserver.sendmail(sender, to, message)
-    # smtpserver.close()
-
 
 user = os.getlogin()
 # os.chdir(f"C:\\Users\\{user}\\Desktop\\ziptesting")
@@ -57,6 +51,6 @@ subject = 'Emails with python'
 to = 'benwellington685@gmail.com'
 sender = 'bradshawcantos@gmail.com'
 user = 'benwellington685@gmail.com'
-file = r"C:\Users\JohnBradshawCantos\Desktop\data.txt"
+file = "C:\\Users\\JohnBradshawCantos\\Documents\\log.txt"
 
-sendmail(sender=sender, to=to, subject=subject, body=body, file=file)
+sendmail(sender=sender, to=to, subject=subject, file=file)

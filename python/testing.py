@@ -1,5 +1,5 @@
-import time
-import socket
-from requests import get
+import os
+while True:
 
-printIPs()
+    os.system("start cmd /c python c:/Users/JohnBradshawCantos/Coding/coding-work/python/art.py")
+    break
